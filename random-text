@@ -1,0 +1,55 @@
+Intro
+Good evening team.
+Today I’ll be walking you through the Playwright MCP Framework.
+Our existing QA automation framework was Marvel, which is built using Selenium, Java, Maven, Cucumber, and REST Assured. Over the last few weeks, we have been working on a migration initiative to move from Marvel to a new Playwright MCP framework powered by TypeScript and AI capabilities.
+Some members across the Auth Fleet have been working on this migration. In this session, I’ll walk you through why we are migrating, the challenges we faced with Marvel, how Playwright MCP addresses those challenges, and finally the architecture differences between the two frameworks.
+Let’s start with some of the key challenges we faced with Marvel.
+One of the biggest challenges was test flakiness. We often saw failures caused by synchronization issues and unstable UI interactions. Playwright comes with built-in auto-waiting capabilities, which ensure elements are visible, enabled, and ready before any interaction happens. This significantly improves stability and reduces flaky failures.
+Another challenge was Java and Maven build complexity. We had to manage multiple dependencies and configurations manually, which increased setup and maintenance effort. With Playwright MCP, once the npm installation is completed, the setup becomes much simpler and dependency management is much smoother.
+Locator maintenance was another area where teams spent a lot of time. Whenever UI changes happened, locators would break and require manual updates. In the Playwright MCP framework, locators are maintained in centralized JSON registry files. On top of that, self-healing capabilities help identify and recover from locator failures during runtime, reducing maintenance effort significantly.
+Marvel also lacked self-healing capabilities. Whenever a test failed, engineers had to manually investigate whether the issue was related to locators, synchronization, test data, or an actual application defect. The Playwright MCP framework introduces multiple levels of healing and recovery. If all healing strategies fail, the issue is escalated for human review.
+Creating automation for new features was another time-consuming activity. Teams had to write feature files, step definitions, page objects, and supporting code manually. With Playwright MCP, scenarios can be generated from user stories or imported feature files. The framework can automatically generate spec files, TypeScript code, and supporting page objects. Tasks that previously took days can now be completed much faster.
+Another major improvement is AI-assisted development. With MCP integrated directly into the framework, AI agents can assist with code generation, framework updates, debugging, migration activities, and execution workflows.
+Reporting has also been enhanced. Instead of a single Cucumber report, the framework can generate execution reports, coverage reports, healing reports, and failure categorization reports. It can automatically classify failures into categories such as environment issues, locator issues, automation issues, application issues, and test data issues, helping teams identify root causes much faster.
+Now that we have looked at the challenges and improvements, let’s move on to the framework architecture.
+
+Architecture
+Previously, Marvel relied on multiple configuration files such as configuration.json and applicationparams.json. In Playwright MCP, these settings are consolidated into a single .environment file.
+This file stores environment configuration, browser configuration, execution settings, and other framework-related information.
+From a migration perspective, the setup is very straightforward. We simply provide the repository details and GitHub token, and after that the migration process can begin.
+At the core of the framework, we have a master guide file called MarvelFramework.md. This file acts as the primary instruction document for the agent and contains the complete migration and execution workflow.
+The framework operates in three phases.
+Phase 1 – Asset Extraction
+In this phase, the framework pulls all existing assets from the original repository, including feature files, locators, test data, configuration files, and supporting resources.
+Phase 2 – AI-Assisted Migration
+In this phase, each feature is executed one by one using Playwright MCP. The AI agent analyzes failures, fixes issues on the fly, updates locators when required, and continuously improves the migrated assets.
+Phase 3 – Regression Validation
+Once migration is complete, all finalized tests are executed in headless mode using standard Playwright execution through npx playwright test. This serves as the final regression validation step.
+Apart from the master guide file, we also have multiple instruction files that are referenced by the agent during execution.
+These instruction files define framework behavior, migration rules, coding standards, locator handling strategies, healing workflows, reporting logic, and execution guidelines.
+You can think of these instruction files as the brain of the framework because they guide the agent on how to perform each activity consistently.
+<Explain instruction files here>
+
+
+Metrics
+Let’s quickly look at some migration metrics.
+Across the Auth Fleet, we currently have approximately 820 web-based automated test cases.
+Compared to previous migration efforts that took over a year to complete, this migration has progressed significantly faster.
+Within just three to four weeks, we have already achieved approximately 90% migration at the fleet level.
+This demonstrates the acceleration that AI-assisted migration can bring to large automation programs.
+Another important point is that all existing assets are preserved during migration. This includes feature files, locator definitions, test data files, configuration files, and application parameters.
+The goal moving forward is not just migration but also increasing automation coverage further through AI-driven approaches.
+
+
+Future
+Looking ahead, the framework currently supports web automation and is ready for migration activities.
+API automation and mobile automation are currently under POC and will be integrated into future releases.
+For new test cases, users can simply provide Jira information in the .environment file and specify the target platform. The framework can then automatically generate the required artifacts, including feature files, locators, specs, and test data.
+Traditionally, onboarding a new feature into automation required significant manual effort. With Playwright MCP and AI, this process becomes faster.
+Our next goal is to integrate the entire SDLC workflow. This includes starting from Jira intake, test creation, automation generation, execution, validation, and finally code check-in, all with minimal manual intervention.
+
+
+Conclusion
+To conclude, this migration is not just a framework upgrade from Selenium to Playwright. It is a step towards AI-assisted test automation and productivity.
+By combining Playwright’s stability with MCP, we are reducing manual effort and creating a foundation for future AI-driven automation.
+Thank you everyone for your time.
